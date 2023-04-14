@@ -20,9 +20,15 @@ Each method that alters the list itself makes sure to lock and unlock properly.
 ## Problem 2
 I ran out of time to implement this in code as problem 1 took much longer than I anticipated (still my bad) but regardless here is what I WOULD do.
 ### Idea
-Create a class, maybe something like 'log' that consists of a temperature and a time it was taken.  
+Create a class, maybe something like 'log' that consists of a temperature, time it was taken, and a boolean flag.  
 Create a list that keeps track of logs based on temperatures in ascending order.  
 Create a list that keeps track of logs based on time in order of occurence (first occurred before last, last is most recent)  
+
+Structure the lists in a way in which they can only hold enough logs for around 1 hour, the first entry is flagged   
+Whenever a new entry would remove an old entry that is flagged, flag the new entry.  
+This could be used to run the analysis every hour, as it would take roughly one hour for a flagged entry to make it's way all the way through the list.  
+
+In retrospect this would be easier with a concurrent CIRCULAR DOUBLY linked list. Doubly linked so you can easily traverse backwards to find max temps, and circular to make sure you get the one hour time interval properly done. This way you can potentially use the threads themselves to do the analysis.
 
 Have 8 threads as producers that add to the concurrent list, making sure it is placed in the right position in both temperatures and time lists (The lists will have identical values in different orders).
 
