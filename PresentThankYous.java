@@ -39,8 +39,8 @@ public class PresentThankYous {
         thread4.join();
         long endTimeMS = System.currentTimeMillis();
         System.out.println(endTimeMS-startTimeMS);
-        System.out.println(queue.isEmpty());
-        System.out.println(list.isEmpty());
+        //System.out.println(queue.isEmpty());
+        //System.out.println(list.isEmpty());
     }
 }
 class LinkedListThread implements Runnable {
@@ -74,7 +74,7 @@ class LinkedListThread implements Runnable {
                     value = list.removeFirst();
                     if(value==null)
                     	exitFlag = 1;
-                    System.out.println(Thread.currentThread().getName() + " wrote a thank you to " + value);
+                    //System.out.println(Thread.currentThread().getName() + " wrote a thank you to " + value);
                     break;
                 case 2:
                     // Never executed, checks if 'value' is present in the chain already.
